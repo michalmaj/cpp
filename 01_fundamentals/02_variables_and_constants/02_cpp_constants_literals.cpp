@@ -4,6 +4,10 @@
  *
  * In C++, we can use the const keyword to declare a constant. The basic syntax is:
  *  const constant_datatype constant_name = constant_vale;
+ *
+ * Common programming error: In C++, we have to initialize a constant at the time of its
+ * declaration. If we don't initialize a constant at the time of creating it, 
+ * an error will occur.
 */
 
 #include <iostream>
