@@ -15,7 +15,7 @@ int main(){
     if(number < 2)
         is_prime = false;
     
-    for(int i = 2; i < number / 2 + 1; ++i){
+    for(int i = 2; i <= number / 2; ++i){
         if (number == 2)
             break;
         if (number % i == 0){
