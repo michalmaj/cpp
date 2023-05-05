@@ -23,6 +23,7 @@ int main(){
 
     // Declare a pointer variable ptr_num;
     int* ptr_num = nullptr;
+    std::cout << "nullptr: " << ptr_num << "\n";
     
     // Declare a variable num
     int num = 7;
