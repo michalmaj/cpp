@@ -1,7 +1,6 @@
 /*
  * A simple performance test should give an idea of the overall performance.
 */
-
 #include <chrono>
 #include <iostream>
 #include <memory>
