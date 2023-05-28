@@ -36,6 +36,7 @@
 // A simple Shape interface which provides a method to get the Shape's area.
 class Shape{
 public:
+    // Just by writinh the keyword virtual we can reference a parent class pointer to child class object.
     virtual float getArea() {return -1;}
 };
 
