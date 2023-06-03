@@ -1,6 +1,6 @@
 /*
  * C++17 allows us to put our value in a safe container which can be accessed only when its type is 
- * specified.
+ * specified.Historia Pewnej Znajomości
  * The new C++17 data type std::any, std::optional, and std::variant are all based on the Boost Library.
  *
  * std::any is a type-safe container for single values of any type which is copy-construible. There are a
