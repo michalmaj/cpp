@@ -3,6 +3,23 @@
  * elements. As the algorithms are function templates, the are independent of the type of container 
  * elements. The glue between the containers and algorithms are the iterators. If your container supports 
  * the interface of an STL container, we can apply the algorithms to our container.
+ * To use the algorithms, we have to keep a few rules in our heads.
+ *
+ * The algorithms are defined in various headers.
+ * <algorithm> - contains the general algorithms.
+ * <numeric> - contans the numeric algorithms.
+ *
+ * Many of the algorithms have the name suffix _if and _copy.
+ * _if - the algorithm can be parametrized by a predicate.
+ * _copy - the algorithm caopies its elements in another range.
+ * Algorithms like: auto num = std::count(InpIt first, InpIt last, const T& val) return the number of 
+ * elements that are equal to val. num is of type iterator_traits<InpIt>::difference_type. We have the 
+ * guarantee that numis sufficient to hold the resut. Because of the automatic return type deduction with
+ * auto, the compiler will give us the right types.
+ *
+ * If the container uses an additional range, it has to be valid
+ * The algorithm std::copy_if uses an iterator to the beginning of its destination range. This destination
+ * range has to be valid.
 */
 #include <iostream>
 #include <algorithm>
