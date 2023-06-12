@@ -20,6 +20,12 @@
  * If the container uses an additional range, it has to be valid
  * The algorithm std::copy_if uses an iterator to the beginning of its destination range. This destination
  * range has to be valid.
+ *
+ * Iterators are the glue. Without iterators, there would be no way for us to move through the container and
+ * alter it according the algorithm. Hence, the iterator forms the backbone of this process.
+ * Iterators define the range of the container on which the algorithm work. They describe a half-open range.
+ * In a half-open range the begin operator points to the beginning, and the end iterator points to one 
+ * position after the range.
 */
 #include <iostream>
 #include <algorithm>
