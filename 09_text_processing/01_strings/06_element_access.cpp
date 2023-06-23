@@ -21,7 +21,7 @@ int main(){
         
     try{
         str.at(10);
-    }catch(std::exception& e){
+    }catch(std::exception& e){ // We can also use: const std::out_of_range& e
         std::cerr << "Exception: " << e.what() << std::endl;
     }
     
