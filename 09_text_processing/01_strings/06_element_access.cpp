@@ -4,6 +4,11 @@
  * the string . With str[n] and str.at(n) we get the n-th element by index. In the first case method returns
  * the n-th character of string. The string boundaries will not be checked. In the second case .at(n) will
  * check the strin boundaries. If the boundaries are violated a std::out_of_range exception is thrown.
+ * 
+ * Example:
+ * It is a particulary interesting to see in the example that the copiler performs the invocation str[10].
+ * The access outside the string boundaries is undefined behavior. In contrast, the C++ runtime throws an
+ * std::out_of_range exception for the call str.at(10).
 */
 #include <iostream>
 #include <stdexcept>
