@@ -22,7 +22,9 @@ struct Power<m, 0>{
   static const int value = 1;
 };
 
-// Runs at runtime
+// Runs at runtime and at compile-time:
+// 1. Template arguments is evaluated at compile-time.
+// 2. The function argument is evaluated at runtime.
 template <int n>
 int power2(const int& m){
   return power2<n - 1>(m) * m;
