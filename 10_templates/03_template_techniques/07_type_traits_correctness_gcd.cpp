@@ -4,6 +4,8 @@
  * type-traits library.
 */
 #include <iostream>
+#include <type_traits>
+#include <typeinfo>
 
 // gcd - The First
 // Our starting point is the euclid algorithm to calculate the greatest common divisor of two numbers.
@@ -31,6 +33,21 @@ T gcd2(T a, T b){
   else return gcd2(b, a % b);
 }
 
+// But what about the second issue. THe gcd algorithm should accept argumnents of a different type.
+// gcd - The Third (The Smaller Type)
+// A good choice for the return type is to use the smaller of both types. Therefore, we need a ternary 
+// operator at compile-time. Thanks to the type-traits library, we have it. The ternary function 
+// std::conditional operates on types and not on values. That's because we apply the function at 
+// compile-time. So, we have to feed std::conditional with the right constant expression and we are done.
+// std::conditional<(sizeof(T1) < sizeof(T2)), T1, T2>::type will return, at compile-time, T1 if T1 is 
+// smaller than T2; it will return T2 if T2 is not smaller than T1.
+template <typename T1, typename T2>
+typename std::conditional<(sizeof(T1) < sizeof(T2)), T1, T2>::type gcd(T1 a, T2 b){
+  static_assert(std::is_integral<T1>::value, "T1 should be integral!\n");
+  static_assert(std::is_integral<T2>::value, "T2 should be integral!\n");
+  if(b == 0) return a;
+  else return gcd(b, a & b);
+}
 
 int main(){
   std::cout << gcd1(100, 10) << std::endl;  // 10
@@ -44,6 +61,15 @@ int main(){
 
   //std::cout << gcd2(3.5, 4.0) << std::endl; // ERROR: but we have better output.
   //std::cout << gcd2("100", "10") << std::endl; // ERROR: but we have better output.
+  
+  std::cout << std::endl;
+
+  std::cout << gcd(100,10LL) << std::endl;
+  auto res = gcd(100,10LL);
+  std::conditional<(sizeof(long long)<sizeof(long)), long long, long>::type res2=gcd(100LL,10L);
+  std::cout << typeid(res).name() << std::endl;  // i 
+  std::cout << typeid(res2).name() << std::endl; // l 
+  std::cout << std::endl;
 
 
 
