@@ -1,57 +1,55 @@
+// Overloading function templates
+
 #include <iostream>
 
-void xchg(int& x, int& y){
-  int t = x;
-  x = y;
-  y = t;
+void xchg(int& x, int& y){ // 1
+    int t = x;
+    x = y;
+    y = t;
 }
 
 template <typename T>
-void xchg(T& x, T& y){
-  T t = x;
-  x = y;
-  y = t;
+void xchg(T& x, T& y){ // 2
+    T t = x;
+    x = y;
+    y = t;
 }
 
 template <typename T>
-void xchg(T& x, T& y, T& z){
-  xchg(x, y);
-  xchg(x, z);
+void xchg(T& x, T& y, T& z){ // 3
+    xchg(x, y);
+    xchg(x, z);
 }
 
 int main(){
-std::cout << std::endl;
+    std::cout << "\n";
 
-  int intA = 5;
-  int intB = 10;
-  int intC = 20;
+    int intA{5};
+    int intB{10};
+    int intC{20};
 
-  double doubleA = 5.5;
-  double doubleB = 10.0;
+    double doubleA{5.5};
+    double doubleB{10.0};
 
-  std::cout << "Before: " << intA << ", " << intB << std::endl;
-  xchg(intA, intB);              // 1
-  std::cout << "After: " << intA << ", " << intB << std::endl;
+    std::cout << "Before: " << intA << ", " << intB << "\n";
+    xchg(intA, intB); // 1
+    std::cout << "After: " << intA << ", " << intB << "\n";
 
-  std::cout << std::endl;
+    std::cout << "\n";
 
-  std::cout << "Before: " << doubleA << ", " << doubleB << std::endl;
-  xchg(doubleA, doubleB);        // 2
-  std::cout << "After: " << doubleA << ", " << doubleB << std::endl;
-  
-  std::cout << std::endl;
+    std::cout << "Before: " << doubleA << ", " << doubleB << "\n";
+    xchg(doubleA, doubleB); // 2
+    std::cout << "Before: " << doubleA << ", " << doubleB << "\n";
 
-  xchg<>(intA, intB);            // explicit 2
-  xchg<int>(intA, intB);         // explicit 2: xchg<int>
-  // xchg<double>(intA, intB);      // ERROR explicit xchg<double>
+    std::cout << "\n";
 
-  std::cout << "Before: " << intA << ", " << intB << ", " << intC << std::endl;
-  xchg(intA, intB, intC);        // 3
-  std::cout << "After: " << intA << ", " << intB << ", " << intC << std::endl;
+    xchg<>(intA, intB); // explicit 2
+    xchg<int>(intA, intB); // explicit 2: xchg<int>
+//    xchg<double>(intA, intB); // CE: templates do not support an automatic type conversion (here: int to double)
 
-  std::cout << std::endl;
+    std::cout << "Before: " << intA << ", " << intB << ", " << intC << std::endl;
+    xchg(intA, intB, intC); // 3
+    std::cout << "After: " << intA << ", " << intB << ", " << intC << std::endl;
 
-
-
-  return 0;
+    return 0;
 }
