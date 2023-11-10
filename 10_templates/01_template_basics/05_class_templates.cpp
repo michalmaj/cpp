@@ -1,46 +1,39 @@
-/*
- * Inheritance in Class Templates.
-*/
+// Inheritance in Class Templates
 #include <iostream>
 
 template <typename T>
 class Base{
 public:
-  void func1() const {
-    std::cout << "func1()" << std::endl;
-  }
-
-  void func2() const {
-    std::cout << "func2()" << std::endl;
-  }
-
-  void func3() const {
-    std::cout << "func3()" << std::endl;
-  }
+    void func1() const{
+        std::cout << "func1()" << std::endl;
+    }
+    void func2() const{
+        std::cout << "func2()" << std::endl;
+    }
+    void func3() const{
+        std::cout << "func3()" << std::endl;
+    }
 };
 
+// Derived class is publicly inherited from Base and may, therefore, use in its method call AllBaseFunctions.
 template <typename T>
 class Derived: public Base<T>{
 public:
-  // Second solution: Introducing the name using Base<T>::func
-  using Base<T>::func2;   
+    using Base<T>::func2; // Introduce the name into current scope.
 
-  void callAllBaseFunctions(){
-    // First solution: Qualification via this pointer: this->func()
-    this->func1();
-    
-    // Senocd solution: call
-    func2();
-    
-    // Full qualified access Base<T>::func()
-    Base<T>::func3();
-  }
+    void callAllBaseFunctions(){
+        this->func1(); // Make the name dependent
+        func2();
+        Base<T>::func3(); // Call the name fully qualified. It can break a virtual dispatch.
+    }
 };
 
 int main(){
-  Derived<int> derived;
-  derived.callAllBaseFunctions();
-  std::cout << std::endl;
+    std::cout << std::endl;
 
-  return 0;
+    Derived<int> derived;
+    derived.callAllBaseFunctions();
+
+
+    return 0;
 }
