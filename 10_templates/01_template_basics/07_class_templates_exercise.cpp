@@ -1,49 +1,49 @@
 /*
- * Use the function static_assert in combination with the function std::is_convertible to catch the
-* erroneous instantiation at compile-time.
-*/
-#include <iostream>
+ * Problem Statement
+ * Uncomment the final assignment doubleArray = strArray and use function static_assert in combination with the function
+ * std::is_convertible to catch the erroneous instantiation at compile-time.
+ */
 #include <algorithm>
+#include <iostream>
 #include <vector>
-
-#include <type_traits>
-#include <concepts> // We can alos use concepts (since C++20)
 
 template <typename T, int N>
 class Array{
+
 public:
-  Array() = default;
+    Array()= default;
 
-  template <typename T2> 
-  requires std::is_convertible_v<T, T2> // Commnet this line or line no 20
-  Array<T, N>& operator=(const Array<T2, N>& arr){
-    //static_assert(std::is_convertible<T2, T>::value, "Cannot convert source type to destination type!");
-    elem.clear();
-    elem.insert(elem.begin(), arr.elem.begin(), arr.elem.end());
-    return *this;
-  }
+    template <typename T2>
+    Array<T, N>& operator=(const Array<T2, N>& arr){
+        // write your code here
+        static_assert(std::is_convertible<T2, T>::value, "Cannot convert source type to destination type!");
 
-  int getSize() const;
+        elem.clear();
+        elem.insert(elem.begin(), arr.elem.begin(), arr.elem.end());
+        return *this;
+    }
 
-  std::vector<T> elem;
+    int getSize() const;
+
+    std::vector<T> elem;
 };
 
 template <typename T, int N>
-int Array<T, N>::getSize() const{
-  return N;
+int Array<T, N>::getSize() const {
+    return N;
 }
 
 int main(){
 
-  Array<double, 10> doubleArray{};
-  Array<int, 10> intArray{};
+    Array<double, 10> doubleArray{};
+    Array<int, 10> intArray{};
 
-  doubleArray= intArray;
+    doubleArray= intArray;
 
-  Array<std::string, 10> strArray{};
-  Array<int, 100> bigIntArray{};
+    Array<std::string, 10> strArray{};
+    Array<int, 100> bigIntArray{};
 
-  doubleArray = strArray;
+    doubleArray= strArray;            // ERROR: cannot convert ‘const std::basic_string<char>’ to ‘double’
+    // doubleArray= bigIntArray;         // ERROR: no match for ‘operator=’ in ‘doubleArray = bigIntArray
 
-  return 0;
 }
