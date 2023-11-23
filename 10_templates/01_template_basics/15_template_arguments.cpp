@@ -1,23 +1,17 @@
-/*
- * Function Template Argument Deduction by Unversal Reference.
-*/
-#include <iostream>
+// Function Template Argument Deduction by Universal Reference
 
 template <typename T>
-void funcUnversal(T&& param){
-  std::cout << param << std::endl;
-}
+void funcUniversal(T&& param){}
+
 
 int main(){
-  int x = 2023;
-  const int cx = x;
-  const int& rx = x;
 
-  funcUnversal(x);;
-  funcUnversal(cx);;
-  funcUnversal(rx);;
-  funcUnversal(2023);;
+    int x = 2011;
+    const int cx = x;
+    const int& rx = x;
 
-
-  return 0;
+    funcUniversal(x);
+    funcUniversal(cx);
+    funcUniversal(rx);
+    funcUniversal(2014);
 }
