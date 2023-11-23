@@ -79,3 +79,47 @@
  *      return pred(fir, sec);
  *  }
  */
+// Deduction of Template Arguments
+#include <iostream>
+
+// Takes 2 arguments which have the same type and returns true if the first element is less than the second one.
+template <typename T>
+bool isSmaller(T fir, T sec){
+    return fir < sec;
+}
+
+// Takes 2 arguments which can have a different type.
+template <typename T, typename U>
+bool isSmaller2(T fir, U sec){
+    return fir < sec;
+}
+
+// Takes 2 arguments which can have different types. The return type must be specified because it cannot be deduced
+// directly from the function arguments.
+template <typename R, typename T, typename U>
+R add(T fir, U sec){
+    return fir + sec;
+}
+
+int main(){
+
+    std::cout << std::boolalpha;
+
+    std::cout << "isSmaller(1, 2): " << isSmaller(1, 2) << "\n"; // True
+//    std::cout << "isSmaller(1, 2): " << isSmaller(1, 2LL) << "\n"; // CE: two different types
+
+    std::cout << "isSmaller<int>(1, 2LL): " << isSmaller(1, 2) << "\n"; // Fine, explicit conversion to int
+    std::cout << "isSmaller<double>(1, 2): " << isSmaller<double>(1, 2LL) << "\n"; // Same, but to double
+
+    std::cout << "\n\n";
+
+    std::cout << "isSmaller2(1, 2LL): " << isSmaller2(1, 2LL) << "\n"; // True
+
+    std::cout << "\n\n";
+
+    std::cout << "add<long, long, int>(1000000,1000000): " << add<long, long, int>(1000000,1000000) << "\n";
+    std::cout << "add<double, double>(1000000,1000000): " << add<double, double>(1000000,1000000) << "\n";
+    std::cout << "add<double, double, float>(1000000,1000000): " << add<double, double, float>(1000000,1000000) << "\n";
+
+    return 0;
+}
