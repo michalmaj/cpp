@@ -1,22 +1,15 @@
-/*
- * Function Template Argument Deduction by Value.
-*/
-#include <iostream>
+// Function Template Argument Deduction by Value
 
 template <typename T>
-void funcValue(T param){
-  std::cout << param << std::endl;
-}
+void funcValue(T param){}
 
 int main(){
-  int x = 2023;
-  const int cx = x;
-  const int& rx = x;
 
-  funcValue(x);
-  funcValue(cx);
-  funcValue(rx);
+    int x = 2023;
+    const int cx = x;
+    const int& rx = x;
 
-
-  return 0;
+    funcValue(x);
+    funcValue(cx);
+    funcValue(rx);
 }
